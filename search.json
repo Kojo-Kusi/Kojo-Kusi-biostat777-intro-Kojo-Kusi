@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "I’m a physician from Ghana currently pursuing my MPH at Johns Hopkins. I care about improving health outcomes through better clinical trials and research on chronic diseases in Africa.\n\n\n\nHere’s something that brings me joy: The best salad I ever had. My uncle got it for me in Philly!\n\n\n\nThe best salad I ever had\n\n\n\n\n\n\n\nI love Jesus.\n\nI’m into headphones, smartwatches, and telescopes (though I don’t own one yet!).\n\nMy favorite paradoxes are the Omnipotence paradox and the Sleeping Beauty paradox.\n\nChristopher Nolan is my favorite director — held off watching Oppenheimer just to see it in IMAX.\n\nHuge Liverpool/Steven Gerrard fan ⚽ #YNWA!!\n\nI once wanted to become an Astronomer.\n\nTim Duncan is the GOAT of basketball 🏀."
+  },
+  {
+    "objectID": "index.html#something-i-enjoy",
+    "href": "index.html#something-i-enjoy",
+    "title": "Welcome",
+    "section": "",
+    "text": "Here’s something that brings me joy: The best salad I ever had. My uncle got it for me in Philly!\n\n\n\nThe best salad I ever had"
+  },
+  {
+    "objectID": "index.html#fun-facts",
+    "href": "index.html#fun-facts",
+    "title": "Welcome",
+    "section": "",
+    "text": "I love Jesus.\n\nI’m into headphones, smartwatches, and telescopes (though I don’t own one yet!).\n\nMy favorite paradoxes are the Omnipotence paradox and the Sleeping Beauty paradox.\n\nChristopher Nolan is my favorite director — held off watching Oppenheimer just to see it in IMAX.\n\nHuge Liverpool/Steven Gerrard fan ⚽ #YNWA!!\n\nI once wanted to become an Astronomer.\n\nTim Duncan is the GOAT of basketball 🏀."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Kojo Sebeh Kusi",
+    "section": "",
+    "text": "MPH Candidate in Epidemiology and Biostatistics at the Johns Hopkins Bloomberg School of Public Health\nKojo Kusi is a physician and an aspiring public health professional from Ghana with a strong interest in chronic disease epidemiology, particularly cardiovascular and cardiometabolic conditions.\nHe is passionate about developing scalable interventions to reduce the burden of cardiovascular disease, assessing causality through applied epidemiology, and improving surgical outcomes. His research interests span clinical trial design, outcomes research, and data analysis, with an overarching goal of translating evidence from trials into effective public health and clinical strategies.\nAt Johns Hopkins, he works with the Institute for Clinical and Translational Research (ICTR), contributing to patient recruitment efforts for ongoing clinical trials. For his practicum, he is working with a team to explore the feasibility of developing a predictive model for malaria incidence based on seasonality and climate patterns to help hospitals in Kumasi, Ghana anticipate and prepare for patient surges. He also collaborates with global cardiac and trauma surgeons on studies investigating patient outcomes following cardiac surgery.\n\n\n\nProfessional Background\nHe worked as a clinician since graduating from medical school, most recently as a Medical Officer in the Department of Anesthesia at the Korle Bu Teaching Hospital, Ghana’s largest tertiary referral center.\nCurrently, he is pursuing a Masters of Public Health (MPH) in the Epidemiology and Biostatistics concentration at the Johns Hopkins Bloomberg School of Public Health.\n\n\n\nEducation\nMaster of Public Health (Epidemiology and Biostatistics)\nExpected May 2026\nJohns Hopkins Bloomberg School of Public Health — Baltimore, MD\nBachelor of Medicine and Bachelor of Surgery (MD Equivalent)\nNovember 2020\nUniversity of Ghana, School of Medicine and Dentistry — Accra, Ghana"
+  },
+  {
+    "objectID": "Example Analysis.html",
+    "href": "Example Analysis.html",
+    "title": "Example analysis",
+    "section": "",
+    "text": "dictionary"
+  },
+  {
+    "objectID": "Example Analysis.html#what-are-we-analyzing",
+    "href": "Example Analysis.html#what-are-we-analyzing",
+    "title": "Example analysis",
+    "section": "What are we analyzing?",
+    "text": "What are we analyzing?\nThis analysis examines how age, sex, and diagnosis type (STEMI, NSTEMI, or unstable angina) relate to ejection fraction (EF) among patients with acute coronary syndrome (ACS). It summarizes EF distributions across subgroups and visualizes patterns in age and diagnosis using tidyverse tools to provide a concise, reproducible example of clinical exploratory data analysis.\nIntended audience. This analysis is designed for students, clinicians, and early-career researchers who are learning how to apply tidyverse tools to explore clinical datasets. It may also be useful for MPH and data science learners interested in seeing how exploratory data analysis (EDA) can reveal patterns in patient characteristics, such as age, sex, and ejection fraction, within an acute coronary syndrome (ACS) cohort.\nData source. We use acs_patients_df from the CardioDataSets R package.\nPackage home: https://CRAN.R-project.org/package=CardioDataSets\nDataset reference: CardioDataSets::acs_patients_df."
+  },
+  {
+    "objectID": "Example Analysis.html#variable",
+    "href": "Example Analysis.html#variable",
+    "title": "Example analysis",
+    "section": "Variable",
+    "text": "Variable\nBelow is the list of variable names and type.\n\nlibrary(tidyverse)\nlibrary(CardioDataSets)\n\n\n# the raw data\nraw &lt;- CardioDataSets::acs_patients_df\n\n# quick glance\nskim_tbl &lt;- tibble(\n  variable    = names(raw),\n  type        = vapply(raw, \\(x) class(x)[1], character(1)))\n\nknitr::kable(skim_tbl, caption = \"Variables for acs_patients_df \")\n\n\nVariables for acs_patients_df\n\n\nvariable\ntype\n\n\n\n\nage\ninteger\n\n\nsex\ncharacter\n\n\ncardiogenicShock\ncharacter\n\n\nentry\ncharacter\n\n\nDx\ncharacter\n\n\nEF\nnumeric\n\n\nheight\nnumeric\n\n\nweight\nnumeric\n\n\nBMI\nnumeric\n\n\nobesity\ncharacter\n\n\nTC\nnumeric\n\n\nLDLC\ninteger\n\n\nHDLC\ninteger\n\n\nTG\ninteger\n\n\nDM\ncharacter\n\n\nHBP\ncharacter\n\n\nsmoking\ncharacter\n\n\n\n\n\n\n\nTL;DR This page explores patterns in an acute‑coronary‑syndrome (ACS) cohort."
+  },
+  {
+    "objectID": "Example Analysis.html#data-wrangling",
+    "href": "Example Analysis.html#data-wrangling",
+    "title": "Example analysis",
+    "section": "Data wrangling",
+    "text": "Data wrangling\nIn this analysis, I used dplyr functions including mutate(), summarise(), group_by(), and ntile() to create new variables, compute summary statistics, and group the data, and the tidyr function drop_na() to remove rows with missing values.\n\nstd &lt;- raw %&gt;%\n  drop_na(age, sex, EF) %&gt;%\n  mutate(\n    EF_q = ntile(EF, 4),\n    EF_q = factor(\n      EF_q,\n      labels = c(\"Q1\", \"Q2\", \"Q3\", \"Q4\")))\nsummaries &lt;- list(\n  overall = std %&gt;%\n    summarise(\n      n = n(),\n      mean_age = mean(age, na.rm = TRUE),\n      median_EF = median(EF, na.rm = TRUE)\n    ),\n  ef_by_sex = std %&gt;%\n    group_by(sex, EF_q) %&gt;%\n    summarise(\n      n = n(),\n      mean_EF = mean(EF, na.rm = TRUE),\n      .groups = \"drop\"))\n\nknitr::kable(summaries$overall, caption = \"Overall cohort snapshot (by EF)\")\n\n\nOverall cohort snapshot (by EF)\n\n\nn\nmean_age\nmedian_EF\n\n\n\n\n723\n63.13416\n58.1\n\n\n\n\nknitr::kable(summaries$ef_by_sex, caption = \"EF Quartiles by Sex\")\n\n\nEF Quartiles by Sex\n\n\nsex\nEF_q\nn\nmean_EF\n\n\n\n\nFemale\nQ1\n55\n41.01636\n\n\nFemale\nQ2\n47\n54.63404\n\n\nFemale\nQ3\n68\n60.34412\n\n\nFemale\nQ4\n70\n65.40857\n\n\nMale\nQ1\n126\n42.70714\n\n\nMale\nQ2\n134\n55.28881\n\n\nMale\nQ3\n113\n60.08584\n\n\nMale\nQ4\n110\n66.21000\n\n\n\n\n\nThe overall cohort consists of 723 patients with a mean age of 63 years and a median ejection fraction (EF) of 58.1%. When stratified by EF quartiles and sex, females and males have similar EF distributions, with the lowest quartile around 41–43% and the highest quartile around 65–66%. The distribution shows slightly more males in the lower quartiles, but overall, EF appears fairly balanced between sexes."
+  },
+  {
+    "objectID": "Example Analysis.html#plot-1-age-distribution-by-ef-status-faceted-by-sex",
+    "href": "Example Analysis.html#plot-1-age-distribution-by-ef-status-faceted-by-sex",
+    "title": "Example analysis",
+    "section": "Plot 1: Age distribution by EF status (faceted by sex)",
+    "text": "Plot 1: Age distribution by EF status (faceted by sex)\n\n\n\n\n\n\nNoteNote\n\n\n\nAll analyses in this page are exploratory and focus on visualization and data wrangling rather than hypothesis testing. The goal is to illustrate tidyverse workflows using a clinical dataset.\n\n\n\nplt_age &lt;- std %&gt;%\n  ggplot(aes(x = age, fill = Dx)) +   # use Dx instead of stemi\n  geom_density(alpha = 0.4) +\n  facet_wrap(~ sex, nrow = 1) +\n  labs(\n    title = \"Age distributions by ACS diagnosis\",\n    subtitle = \"Faceted by sex; kernel density smooths highlight shifts\",\n    x = \"Age (years)\", y = \"Density\",\n    fill = \"Diagnosis\",\n    caption = \"Example analysis using acs_patients_df\"\n  ) +\n  theme_minimal()\nplt_age"
+  },
+  {
+    "objectID": "Example Analysis.html#plot-2-acs-diagnosis-across-ef-quartiles",
+    "href": "Example Analysis.html#plot-2-acs-diagnosis-across-ef-quartiles",
+    "title": "Example analysis",
+    "section": "Plot 2: ACS diagnosis across EF quartiles",
+    "text": "Plot 2: ACS diagnosis across EF quartiles\nCompute mortality rates and display a grouped column chart.\n\nby_EF &lt;- std %&gt;%\n  group_by(Dx, EF_q) %&gt;%\n  summarise(n = n(), .groups = \"drop\") %&gt;%\n  arrange(Dx, EF_q)\n\n# Bar plot\nplt_EF &lt;- ggplot(by_EF, aes(x = EF_q, y = n, fill = Dx)) +\n  geom_col(position = position_dodge(width = 0.7)) +\n  geom_text(aes(label = n),\n            position = position_dodge(width = 0.7), \n            vjust = -0.3, size = 3) +\n  labs(\n    title = \"Patient counts by EF quartile and ACS type\",\n    subtitle = \"Counts of STEMI, NSTEMI, and UA across EF quartiles\",\n    x = \"EF quartile\", y = \"Number of patients\",\n    fill = \"ACS type\",\n    caption = \"Using EF quartiles and Dx from acs_patients_df\"\n  ) +\n  theme_minimal()\nplt_EF\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantInterpretation Reminder\n\n\n\nFindings shown here describe associations, not causation. Differences by sex, age, or diagnosis type may reflect underlying clinical or demographic factors not accounted for in this exploratory analysis."
+  },
+  {
+    "objectID": "Example Analysis.html#plot-3-ejection-fraction-vs-age",
+    "href": "Example Analysis.html#plot-3-ejection-fraction-vs-age",
+    "title": "Example analysis",
+    "section": "Plot 3: Ejection fraction vs age",
+    "text": "Plot 3: Ejection fraction vs age\n\nplt_EF_age &lt;- raw %&gt;%\n  filter(Dx == \"STEMI\", DM == \"Yes\") %&gt;% \n  ggplot(aes(x = age, y = EF, color = sex)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(\n    title = \"Ejection fraction varies with age\",\n    subtitle = \"Linear Regression Line\",\n    x = \"Age (years)\", y = \"Ejection fraction (%)\",\n    color = \"Sex\",\n    caption = \"Illustrative trend; relationship may be confounded\"\n  ) +\n  theme_minimal()\n\nplt_EF_age\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 7 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 7 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nBelow is a Wikimedia Commons heart anatomy illustration, included to contextualize ACS pathophysiology:"
+  },
+  {
+    "objectID": "Example Analysis.html#a-tiny-tidy-riskfactor-table-long-format-demo",
+    "href": "Example Analysis.html#a-tiny-tidy-riskfactor-table-long-format-demo",
+    "title": "Example analysis",
+    "section": "A tiny tidy risk‑factor table (long format demo)",
+    "text": "A tiny tidy risk‑factor table (long format demo)\n\nrisk_tbl &lt;- raw %&gt;%\n  select(sex, Dx, DM, smoking) %&gt;%\n  mutate(\n    DM = DM == \"Yes\",        \n    smoking = smoking %in% c(\"Smoker\", \"Ex-smoker\")\n  ) %&gt;%\n  pivot_longer(cols = c(DM, smoking), names_to = \"risk\", values_to = \"present\") %&gt;%\n  group_by(sex, Dx, risk) %&gt;%\n  summarise(\n    `Risk factor prevalence (%)` = round(mean(present, na.rm = TRUE) * 100, 1),\n    n = n(), \n    .groups = \"drop\")\nknitr::kable(risk_tbl, caption = \"Share of patients with selected risk factors by sex and STEMI status\")\n\n\nShare of patients with selected risk factors by sex and STEMI status\n\n\nsex\nDx\nrisk\nRisk factor prevalence (%)\nn\n\n\n\n\nFemale\nNSTEMI\nDM\n50.0\n50\n\n\nFemale\nNSTEMI\nsmoking\n26.0\n50\n\n\nFemale\nSTEMI\nDM\n35.7\n84\n\n\nFemale\nSTEMI\nsmoking\n32.1\n84\n\n\nFemale\nUnstable Angina\nDM\n38.6\n153\n\n\nFemale\nUnstable Angina\nsmoking\n24.8\n153\n\n\nMale\nNSTEMI\nDM\n31.1\n103\n\n\nMale\nNSTEMI\nsmoking\n87.4\n103\n\n\nMale\nSTEMI\nDM\n30.0\n220\n\n\nMale\nSTEMI\nsmoking\n81.8\n220\n\n\nMale\nUnstable Angina\nDM\n37.2\n247\n\n\nMale\nUnstable Angina\nsmoking\n71.7\n247\n\n\n\n\n\n\nQuick summary:\nExplores how age, sex, and diagnosis type relate to ejection fraction (EF) in ACS patients, using tidyverse tools for reproducible data visualization."
+  },
+  {
+    "objectID": "Example Analysis.html#methods-references-inline-cites",
+    "href": "Example Analysis.html#methods-references-inline-cites",
+    "title": "Example analysis",
+    "section": "Methods & references (inline cites)",
+    "text": "Methods & references (inline cites)\nWe rely on the tidyverse grammar for wrangling and plotting Wickham and Grolemund (2019) Wickham (2016) and use a curated cardiology dataset Rossi (2025)."
+  },
+  {
+    "objectID": "Example Analysis.html#summary",
+    "href": "Example Analysis.html#summary",
+    "title": "Example analysis",
+    "section": "Summary",
+    "text": "Summary\nThis exploratory analysis of patients with acute coronary syndrome (ACS) showed that most patients were between 55 and 75 years old, with similar age distributions across diagnosis types. Ejection fraction (EF) tended to be slightly lower among males and those with STEMI compared to other subgroups. A mild negative trend between EF and age was observed, more evident among males. Smoking was notably more prevalent among men, while diabetes rates were comparable between sexes. Overall, the findings illustrate demographic and clinical variation within ACS subgroups and demonstrate the utility of tidyverse tools for clear, reproducible data exploration."
+  },
+  {
+    "objectID": "Example Analysis.html#functions-used",
+    "href": "Example Analysis.html#functions-used",
+    "title": "Example analysis",
+    "section": "Functions used",
+    "text": "Functions used\n\ndplyr: rename(), mutate(), summarise(), group_by(), arrange(), select(), across(), ntile(), filter()\ntidyr: drop_na(), pivot_longer()\nggplot2: geom_density(), geom_col(), geom_point(), geom_smooth(), facet_wrap()"
+  }
+]
