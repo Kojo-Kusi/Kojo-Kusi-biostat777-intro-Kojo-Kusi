@@ -1,0 +1,204 @@
+---
+title: "Example analysis"
+bibliography: references.bib
+---
+dictionary
+
+
+## What are we analyzing?
+
+This analysis examines how age, sex, and diagnosis type (STEMI, NSTEMI, or unstable angina) relate to ejection fraction (EF) among patients with acute coronary syndrome (ACS). It summarizes EF distributions across subgroups and visualizes patterns in age and diagnosis using tidyverse tools to provide a concise, reproducible example of clinical exploratory data analysis.
+
+
+
+**Intended audience.** This analysis is designed for students, clinicians, and early-career researchers who are learning how to apply tidyverse tools to explore clinical datasets. It may also be useful for MPH and data science learners interested in seeing how exploratory data analysis (EDA) can reveal patterns in patient characteristics, such as age, sex, and ejection fraction, within an acute coronary syndrome (ACS) cohort.
+
+**Data source.** We use `acs_patients_df` from the **CardioDataSets** R package.\
+Package home: <https://CRAN.R-project.org/package=CardioDataSets>\
+Dataset reference: `CardioDataSets::acs_patients_df`.
+
+::: callout-note
+#### Installing package
+You can install directly from a repo via:
+> ``` r
+> # install.packages("remotes")
+> remotes::remotes::install_github("lightbluetitan/cardiodatasets")
+> ```
+:::
+
+## Variable 
+
+Below is the list of variable names and type.
+
+```{r}
+library(tidyverse)
+library(CardioDataSets)
+
+# the raw data
+raw <- CardioDataSets::acs_patients_df
+
+# quick glance
+skim_tbl <- tibble(
+  variable    = names(raw),
+  type        = vapply(raw, \(x) class(x)[1], character(1)))
+
+knitr::kable(skim_tbl, caption = "Variables for acs_patients_df ")
+```
+
+
+::: column-margin
+**TL;DR** This page explores patterns in an acute‑coronary‑syndrome (ACS) cohort.
+:::
+
+## Data wrangling
+
+In this analysis, I used **dplyr** functions including `mutate()`, `summarise()`, `group_by()`, and `ntile()` to create new variables, compute summary statistics, and group the data, and the **tidyr** function `drop_na()` to remove rows with missing values.
+
+```{r}
+std <- raw %>%
+  drop_na(age, sex, EF) %>%
+  mutate(
+    EF_q = ntile(EF, 4),
+    EF_q = factor(
+      EF_q,
+      labels = c("Q1", "Q2", "Q3", "Q4")))
+summaries <- list(
+  overall = std %>%
+    summarise(
+      n = n(),
+      mean_age = mean(age, na.rm = TRUE),
+      median_EF = median(EF, na.rm = TRUE)
+    ),
+  ef_by_sex = std %>%
+    group_by(sex, EF_q) %>%
+    summarise(
+      n = n(),
+      mean_EF = mean(EF, na.rm = TRUE),
+      .groups = "drop"))
+
+knitr::kable(summaries$overall, caption = "Overall cohort snapshot (by EF)")
+knitr::kable(summaries$ef_by_sex, caption = "EF Quartiles by Sex")
+```
+
+The overall cohort consists of 723 patients with a mean age of 63 years and a median ejection fraction (EF) of 58.1%. When stratified by EF quartiles and sex, females and males have similar EF distributions, with the lowest quartile around 41–43% and the highest quartile around 65–66%. The distribution shows slightly more males in the lower quartiles, but overall, EF appears fairly balanced between sexes.
+
+
+## Plot 1: Age distribution by EF status (faceted by sex)
+
+```{r}
+plt_age <- std %>%
+  ggplot(aes(x = age, fill = Dx)) +   # use Dx instead of stemi
+  geom_density(alpha = 0.4) +
+  facet_wrap(~ sex, nrow = 1) +
+  labs(
+    title = "Age distributions by ACS diagnosis",
+    subtitle = "Faceted by sex; kernel density smooths highlight shifts",
+    x = "Age (years)", y = "Density",
+    fill = "Diagnosis",
+    caption = "Example analysis using acs_patients_df"
+  ) +
+  theme_minimal()
+plt_age
+```
+
+## Plot 2: ACS diagnosis across EF quartiles
+
+Compute mortality rates and display a grouped column chart.
+
+```{r}
+by_EF <- std %>%
+  group_by(Dx, EF_q) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  arrange(Dx, EF_q)
+
+# Bar plot
+plt_EF <- ggplot(by_EF, aes(x = EF_q, y = n, fill = Dx)) +
+  geom_col(position = position_dodge(width = 0.7)) +
+  geom_text(aes(label = n),
+            position = position_dodge(width = 0.7), 
+            vjust = -0.3, size = 3) +
+  labs(
+    title = "Patient counts by EF quartile and ACS type",
+    subtitle = "Counts of STEMI, NSTEMI, and UA across EF quartiles",
+    x = "EF quartile", y = "Number of patients",
+    fill = "ACS type",
+    caption = "Using EF quartiles and Dx from acs_patients_df"
+  ) +
+  theme_minimal()
+plt_EF
+```
+
+::: {.callout-important title="Interpretation Reminder"}
+Findings shown here describe associations, not causation. Differences by sex, age, or diagnosis type may reflect underlying clinical or demographic factors not accounted for in this exploratory analysis.
+:::
+
+## Plot 3: Ejection fraction vs age
+
+```{r}
+plt_EF_age <- raw %>%
+  filter(Dx == "STEMI", DM == "Yes") %>% 
+  ggplot(aes(x = age, y = EF, color = sex)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Ejection fraction varies with age",
+    subtitle = "Linear Regression Line",
+    x = "Age (years)", y = "Ejection fraction (%)",
+    color = "Sex",
+    caption = "Illustrative trend; relationship may be confounded"
+  ) +
+  theme_minimal()
+
+plt_EF_age
+```
+
+::: callout-warning
+#### Caution
+
+These are *unadjusted* associations. Causal interpretation is not warranted. For risk adjustment, consider logistic or Poisson regression with appropriate covariates and, where needed, causal diagrams @hernan2020.
+:::
+
+## One externally sourced image (not created here)
+
+Below is a Wikimedia Commons heart anatomy illustration (freely licensed), included to contextualize ACS pathophysiology:
+
+![](https://upload.wikimedia.org/wikipedia/commons/1/18/Coronary_arteries.svg){fig-cap="Licensed Wikimedia Commons heart diagram (CC BY-SA 4.0)"}
+
+## A tiny tidy risk‑factor table (long format demo)
+
+```{r}
+risk_tbl <- raw %>%
+  select(sex, Dx, DM, smoking) %>%
+  mutate(
+    DM = DM == "Yes",        
+    smoking = smoking %in% c("Smoker", "Ex-smoker")
+  ) %>%
+  pivot_longer(cols = c(DM, smoking), names_to = "risk", values_to = "present") %>%
+  group_by(sex, Dx, risk) %>%
+  summarise(
+    `Risk factor prevalence (%)` = round(mean(present, na.rm = TRUE) * 100, 1),
+    n = n(), 
+    .groups = "drop")
+knitr::kable(risk_tbl, caption = "Share of patients with selected risk factors by sex and STEMI status")
+```
+
+::: {.margin}
+**Quick summary:**  
+Explores how age, sex, and diagnosis type relate to ejection fraction (EF) in ACS patients, using tidyverse tools for reproducible data visualization.
+:::
+
+## Methods & references (inline cites)
+
+We rely on the tidyverse grammar for wrangling and plotting @Wickham2019tidy @wickham2016ggplot2 and use a curated cardiology dataset @CardioDataSets2024.
+
+## Summary
+
+This exploratory analysis of patients with acute coronary syndrome (ACS) showed that most patients were between 55 and 75 years old, with similar age distributions across diagnosis types. Ejection fraction (EF) tended to be slightly lower among males and those with STEMI compared to other subgroups. A mild negative trend between EF and age was observed, more evident among males. Smoking was notably more prevalent among men, while diabetes rates were comparable between sexes. Overall, the findings illustrate demographic and clinical variation within ACS subgroups and demonstrate the utility of tidyverse tools for clear, reproducible data exploration.
+
+## Functions used
+
+-   **dplyr**: `rename()`, `mutate()`, `summarise()`, `group_by()`, `arrange()`, `select()`, `across()`, `ntile()`, `filter()`
+
+-   **tidyr**: `drop_na()`, `pivot_longer()`
+
+-   **ggplot2**: `geom_density()`, `geom_col()`, `geom_point()`, `geom_smooth()`, `facet_wrap()`

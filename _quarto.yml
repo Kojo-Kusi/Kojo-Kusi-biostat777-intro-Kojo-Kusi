@@ -1,0 +1,25 @@
+project:
+  type: website
+
+website:
+  title: "Project 1"
+  navbar:
+    right: 
+    - href: index.qmd
+      text: Home
+    - href: about.qmd
+      text: About
+    - href: Example Analysis.qmd
+      text: Example Analysis
+    - icon: github
+      href: https://github.com/Kojo-Kusi
+    - icon: twitter
+      href: https://twitter.com/KusiSebeh  
+  page-footer: 
+      left: "© 2025 Kojo S. Kusi" 
+      right: "Built with ❤️ using [Quarto](https://quarto.org/)"        
+format:
+  html:
+    theme: morph
+    css: styles.css
+    toc: true

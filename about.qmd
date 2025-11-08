@@ -1,0 +1,46 @@
+---
+title: "Kojo Sebeh Kusi"
+image: Kusi.jpg
+about:
+  template: trestles
+  links:
+    - icon: linkedin
+      url: "https://linkedin.com/in/kojosebehkusi"
+    - icon: github
+      url: "https://github.com/Kojo-Kusi"
+    - icon: twitter
+      url: "https://x.com/KusiSebeh"
+    - icon: envelope
+      url: "mailto:kkusi1@jh.edu"
+    - icon: file-text
+      file: "Kojo Sebeh Kusi CV.pdf" 
+comments: false
+
+---
+### MPH Candidate in Epidemiology and Biostatistics at the Johns Hopkins Bloomberg School of Public Health
+
+Kojo Kusi is a physician and an aspiring public health professional from Ghana with a strong interest in chronic disease epidemiology, particularly cardiovascular and cardiometabolic conditions. 
+
+He is passionate about developing scalable interventions to reduce the burden of cardiovascular disease, assessing causality through applied epidemiology, and improving surgical outcomes. His research interests span clinical trial design, outcomes research, and data analysis, with an overarching goal of translating evidence from trials into effective public health and clinical strategies.
+
+At Johns Hopkins, he works with the Institute for Clinical and Translational Research (ICTR), contributing to patient recruitment efforts for ongoing clinical trials. For his practicum, he is working with a team to explore the feasibility of developing a predictive model for malaria incidence based on seasonality and climate patterns to help hospitals in Kumasi, Ghana anticipate and prepare for patient surges. He also collaborates with global cardiac and trauma surgeons on studies investigating patient outcomes following cardiac surgery.
+
+---
+
+### Professional Background
+
+He worked as a clinician since graduating from medical school, most recently as a **Medical Officer** in the **Department of Anesthesia** at the **Korle Bu Teaching Hospital**, Ghana’s largest tertiary referral center.
+
+Currently, he is pursuing a Masters f Public Health (MPH)** in the **Epidemiology and Biostatistics** concentration at the **Johns Hopkins Bloomberg School of Public Health**.
+
+---
+
+### Education
+
+**Master of Public Health (Epidemiology and Biostatistics)**  
+*Expected May 2026*  
+Johns Hopkins Bloomberg School of Public Health — Baltimore, MD  
+
+**Bachelor of Medicine and Bachelor of Surgery (MD Equivalent)**  
+*November 2020*  
+University of Ghana, School of Medicine and Dentistry — Accra, Ghana
